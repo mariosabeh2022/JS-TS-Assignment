@@ -1,4 +1,4 @@
-function deepEqual(obj1, obj2) {
+function deepEqual(obj1: any, obj2: any): boolean {
     //Checking if the types of both inputs are equal
     if((typeof(obj1)!=typeof(obj2))||(obj1==null||obj2==null)){
         return false;
@@ -6,7 +6,7 @@ function deepEqual(obj1, obj2) {
     else{
         let equalObjects=true;
         //Looping through one of them
-        for(key in obj1){
+        Object.keys(obj1).forEach(key => {
             //Checking the types of their values
             if(typeof(obj1[key])!=typeof(obj2[key])){
                 equalObjects=false
@@ -19,15 +19,15 @@ function deepEqual(obj1, obj2) {
                 //Getting the inner objects and then comparing each one 
                 let innerObject1=obj1[key]
                 let innerObject2=obj2[key]
-                for(innerKey in innerObject1){
+                Object.keys(innerObject1).forEach(innerKey => {
                     //Comparing their types and values
                     if((typeof(innerObject1)!=typeof(innerObject2))||
                         (innerObject1[innerKey]!==innerObject2[innerKey])){
                         equalObjects=false
                     }
-                }
+                });
             }
-        }   
+        });   
     return equalObjects
     }
 }

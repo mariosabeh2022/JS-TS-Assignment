@@ -29,7 +29,7 @@ class TaskManager {
     }
     displayTasks(): void {
         this.tasks.forEach(task => {
-            console.log(`Task ID ${task.id}, Name: "${task.name}", Status: ${task.status}`) 
+            console.log(`Task ID: ${task.id}, Name: "${task.name}", Status: ${task.status}`) 
         });
     }
 }

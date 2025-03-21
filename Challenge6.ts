@@ -1,19 +1,21 @@
 class LRUCache {
-    constructor(capacity) {
+    private capacity:number=0;
+    private queue:{key:number,value:number}[]=[];
+    constructor(capacity: number) {
         //Checking for positive capacity
         if(isNaN(capacity)||capacity<=0){
             console.log('invalid input')
         }
         else{
-            this.capacity=capacity;
-            this.queue=[]
+            this.capacity = capacity;
+            this.queue = [];
         }
     }
-    get(key) {
+    get(key: number): number | null{
         //Checking for the key input
         if(isNaN(key)){ 
             console.log(null);
-            return;
+            return null;
         }
         for(let i=0;i<this.queue.length;i++){
             //Found in the first element
@@ -23,8 +25,8 @@ class LRUCache {
                 this.queue.shift();
                 this.queue.push(temp);
                 //Updating the recently used and returning the element needed
-                console.log(temp.key);
-                return;
+                console.log(this.queue[this.queue.length-1].value);
+                return null;
             }
             //Found in the middle
             else if(this.queue[i].key==key && i>=1&&i<=this.queue.length-2){
@@ -34,21 +36,22 @@ class LRUCache {
                     this.queue[k]=this.queue[k+1];
                 }
                 //Updating the recently used and returning the element needed
-                this.queue[this.queue.length-1]=temp;
-                console.log(this.queue[this.queue.length-1].key);
-                return;
+                this.queue.pop()
+                this.queue.push(temp);
+                console.log(this.queue[this.queue.length-1].value);
+                return null;
             }
             //Found at the end
             else if(this.queue[i].key==key && i==this.queue.length-1){
                 console.log(this.queue[this.queue.length-1].key);
-                return;
+                return null;
             }
         }
         //Not found
         console.log(null)
         return null;
     }
-    put(key, value) {
+    put(key: number, value: number): void {
         //Checking for valid inputs
         if(isNaN(key)||isNaN(value)) return;
         else{
